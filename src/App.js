@@ -2,7 +2,7 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-function App({ values, errors, touched }) {
+function App({ values, errors, touched, isSubmitting }) {
   return (
     <Form>
       <div>
@@ -22,7 +22,9 @@ function App({ values, errors, touched }) {
         <option value="premium">Premium</option>
         <option value="special">Special</option>
       </Field>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={isSubmitting}>
+        Submit
+      </button>
     </Form>
   );
 }
@@ -47,11 +49,12 @@ const FormikApp = withFormik({
   handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
     setTimeout(() => {
       if (values.email === "database@email.com") {
-        setErrors({ email: "That meail is already taken" });
+        setErrors({ email: "That email is already taken" });
       } else {
         resetForm();
       }
-    }, 2000);
+      setSubmitting(false);
+    }, 3000);
   },
 })(App);
 
