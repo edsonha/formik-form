@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { withFormik } from "formik";
 
-function App() {
+function App({ values }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <input value={values.email} type="email" name="email" placeholder="Email" />
   );
 }
 
-export default App;
+const FormikApp = withFormik({
+  mapPropsToValues() {
+    return {
+      email: "Initial Email Value",
+    };
+  },
+})(App);
+
+export default FormikApp;
