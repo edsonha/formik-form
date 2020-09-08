@@ -1,9 +1,15 @@
 import React from "react";
 import { withFormik } from "formik";
 
-function App({ values }) {
+function App({ values, handleChange }) {
   return (
-    <input value={values.email} type="email" name="email" placeholder="Email" />
+    <input
+      value={values.email}
+      type="email"
+      name="email"
+      placeholder="Email"
+      onChange={handleChange}
+    />
   );
 }
 
