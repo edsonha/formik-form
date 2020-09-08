@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+// import App from "./Oldform";
+import App from "./Newform";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App email="database@email.com" />
+    {/* <App email="database@email.com" /> */}
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
