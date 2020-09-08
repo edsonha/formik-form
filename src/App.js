@@ -1,25 +1,13 @@
 import React from "react";
-import { withFormik } from "formik";
+import { withFormik, Form, Field } from "formik";
 
-function App({ values, handleChange, handleSubmit }) {
+function App() {
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={values.email}
-        type="email"
-        name="email"
-        placeholder="Email"
-        onChange={handleChange}
-      />
-      <input
-        value={values.password}
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={handleChange}
-      />
+    <Form>
+      <Field type="email" name="email" placeholder="Email" />
+      <Field type="password" name="password" placeholder="Password" />
       <button type="submit">Submit</button>
-    </form>
+    </Form>
   );
 }
 
