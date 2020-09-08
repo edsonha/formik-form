@@ -44,8 +44,14 @@ const FormikApp = withFormik({
       .min(9, "Password not long custom")
       .required("Password is required custom"),
   }),
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
+    setTimeout(() => {
+      if (values.email === "database@email.com") {
+        setErrors({ email: "That meail is already taken" });
+      } else {
+        resetForm();
+      }
+    }, 2000);
   },
 })(App);
 
