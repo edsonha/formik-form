@@ -1,6 +1,17 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
-import { TextField, Button, Checkbox } from "@material-ui/core";
+import { Formik, Field, Form, useField } from "formik";
+import {
+  TextField,
+  Button,
+  Checkbox,
+  Radio,
+  FormControlLabel,
+} from "@material-ui/core";
+
+const MyRadio = ({ label, ...props }) => {
+  const [field] = useField(props);
+  return <FormControlLabel {...field} control={<Radio />} label={label} />;
+};
 
 function NewForm() {
   return (
@@ -64,9 +75,9 @@ function NewForm() {
               as={Checkbox}
             />
             <div>Yogurt : </div>
-            <Field name="yogurt" type="radio" value="apple" />
-            <Field name="yogurt" type="radio" value="banana" />
-            <Field name="yogurt" type="radio" value="cheery" />
+            <MyRadio name="yogurt" type="radio" value="apple" label="apple" />
+            <MyRadio name="yogurt" type="radio" value="banana" label="banana" />
+            <MyRadio name="yogurt" type="radio" value="cheery" label="cheery" />
             <div>
               <Button type="submit" disabled={isSubmitting}>
                 Submit
