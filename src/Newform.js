@@ -1,12 +1,17 @@
 import React from "react";
 import { Formik, Field, Form } from "formik";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Checkbox } from "@material-ui/core";
 
 function NewForm() {
   return (
     <div>
       <Formik
-        initialValues={{ firstName: "bob", lastName: "default" }}
+        initialValues={{
+          firstName: "bob",
+          lastName: "default",
+          isTall: true,
+          cookies: [],
+        }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
 
@@ -34,6 +39,29 @@ function NewForm() {
                 as={TextField}
               />
             </div>
+            <div>isTall :</div>
+            <div>
+              <Field name="isTall" type="checkbox" as={Checkbox} />
+            </div>
+            <div>Cookies :</div>
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="chocolate chip"
+              as={Checkbox}
+            />
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="sugar chip"
+              as={Checkbox}
+            />
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="cheese chip"
+              as={Checkbox}
+            />
             <div>
               <Button type="submit" disabled={isSubmitting}>
                 Submit
