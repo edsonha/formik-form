@@ -1,17 +1,22 @@
 import React from "react";
 import { Formik } from "formik";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 function NewForm() {
   return (
     <div>
       <Formik
         initialValues={{ firstName: "bob" }}
-        onSubmit={(data) => {
+        onSubmit={(data, { setSubmitting }) => {
+          setSubmitting(true);
+
+          //make async call
           console.log(data);
+
+          setSubmitting(false);
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit }) => (
+        {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit}>
             <TextField
               name="firstName"
@@ -19,6 +24,11 @@ function NewForm() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            <div>
+              <Button type="submit" disabled={isSubmitting}>
+                Submit
+              </Button>
+            </div>
             <pre>{JSON.stringify(values, null, 2)}</pre>
           </form>
         )}
