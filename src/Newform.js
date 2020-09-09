@@ -7,6 +7,7 @@ import {
   Radio,
   FormControlLabel,
 } from "@material-ui/core";
+import * as yup from "yup";
 
 const MyRadio = ({ label, ...props }) => {
   const [field] = useField(props);
@@ -26,6 +27,15 @@ const MyTextField = ({ placeholder, ...props }) => {
   );
 };
 
+const validationSchema = yup.object({
+  firstName: yup.string().required().max(10),
+  // pets: yup.array().of(
+  //   yup.object({
+  //     name: yup.string().required(),
+  //   })
+  // ),
+});
+
 function NewForm() {
   return (
     <div>
@@ -37,13 +47,14 @@ function NewForm() {
           cookies: [],
           yogurt: "",
         }}
-        validate={(values) => {
-          const errors = {};
-          if (values.firstName.includes("bob")) {
-            errors.firstName = "no bob";
-          }
-          return errors;
-        }}
+        validationSchema={validationSchema}
+        // validate={(values) => {
+        //   const errors = {};
+        //   if (values.firstName.includes("bob")) {
+        //     errors.firstName = "no bob";
+        //   }
+        //   return errors;
+        // }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
 
