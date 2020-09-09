@@ -13,16 +13,36 @@ const MyRadio = ({ label, ...props }) => {
   return <FormControlLabel {...field} control={<Radio />} label={label} />;
 };
 
+const MyTextField = ({ placeholder, ...props }) => {
+  const [field, meta] = useField(props);
+  const errorText = meta.error && meta.touched ? meta.error : "";
+  return (
+    <TextField
+      placeholder={placeholder}
+      {...field}
+      helperText={errorText}
+      error={!!errorText}
+    />
+  );
+};
+
 function NewForm() {
   return (
     <div>
       <Formik
         initialValues={{
-          firstName: "bob",
+          firstName: "",
           lastName: "default",
           isTall: true,
           cookies: [],
           yogurt: "",
+        }}
+        validate={(values) => {
+          const errors = {};
+          if (values.firstName.includes("bob")) {
+            errors.firstName = "no bob";
+          }
+          return errors;
         }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
@@ -33,14 +53,13 @@ function NewForm() {
           setSubmitting(false);
         }}
       >
-        {({ values, isSubmitting }) => (
+        {({ values, isSubmitting, errors }) => (
           <Form>
             <div>
-              <Field
+              <MyTextField
                 placeholder="First Name"
                 name="firstName"
                 type="input"
-                as={TextField}
               />
             </div>
             <div>
@@ -84,6 +103,7 @@ function NewForm() {
               </Button>
             </div>
             <pre>{JSON.stringify(values, null, 2)}</pre>
+            <pre>{JSON.stringify(errors, null, 2)}</pre>
           </Form>
         )}
       </Formik>
