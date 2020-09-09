@@ -11,6 +11,7 @@ function NewForm() {
           lastName: "default",
           isTall: true,
           cookies: [],
+          yogurt: "",
         }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
@@ -62,6 +63,10 @@ function NewForm() {
               value="cheese chip"
               as={Checkbox}
             />
+            <div>Yogurt : </div>
+            <Field name="yogurt" type="radio" value="apple" />
+            <Field name="yogurt" type="radio" value="banana" />
+            <Field name="yogurt" type="radio" value="cheery" />
             <div>
               <Button type="submit" disabled={isSubmitting}>
                 Submit
