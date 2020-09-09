@@ -19,6 +19,7 @@ function NewForm() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            <pre>{JSON.stringify(values, null, 2)}</pre>
           </form>
         )}
       </Formik>
